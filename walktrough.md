@@ -1,0 +1,11 @@
+GIDAS — High-Level End-to-End Lifecycle Walkthrough
+
+A governance-recognized PID issuer listed on the EU Trusted List extracts identity data from a physical identity item via MRZ or NFC and binds it to a user-controlled Qualified Signature Creation Device. This initial binding is structured as a Verifiable Credential whose subject is a DID representing that device-controlled digital identity. The issuer applies a Qualified Electronic Seal, establishing the legal trust anchor for the identity binding and certifying that the PID evidence corresponds to the DID’s verification methods.
+
+The DID becomes the public resolution handle for that identity. Its DID Document publishes verification material and service endpoints and is hosted across multiple HTTP origins participating in a tamper-evident replicated network operated by qualified trust services. These hosts maintain append-only histories and cross-check hashes so inconsistencies are detectable and state converges without reliance on a single operator.
+
+The user interacts through a wallet implemented via navigator.credentials and WebAuthn. The QSCD-backed keys can produce Qualified Electronic Signatures and Qualified Electronic Attestations of Attributes directly from the device. The wallet can also store externally issued Qualified Electronic Seals and present them, optionally countersigned with a qualified signature, which itself constitutes a qualified attestation presentation. Private attributes remain local unless selectively disclosed.
+
+All signed or sealed artifacts reference the DID for verification, while status, revocation, and key-history data are published on the replicated trust network. If the user revokes or terminates the PID binding to the DID—such as by issuing a signed revocation event with a defined timestamp—claims asserted after that point must be treated as invalid. This preserves user agency while maintaining verifiable historical integrity.
+
+In effect, governance provides legally recognized issuers, certified devices enforce sole control of keys, and web standards supply global resolution and interoperability. That alignment forms the operational model known as GIDAS.
